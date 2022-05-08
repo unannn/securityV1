@@ -10,13 +10,18 @@ package com.cos.security1.config.auth;
 //Authentication 에 들어가 유저 정보는 UserDetails
 
 import com.cos.security1.entity.User;
+import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
-public class PrincipalDetails implements UserDetails {
+@Data
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user;
 
@@ -68,5 +73,16 @@ public class PrincipalDetails implements UserDetails {
         //사이트에서 1년동안 회원이 로그인을 한해서 휴면 계정으로 하기로함
         // 현재시간 - 최근 로그인 시간이 1년을 초과하면 return false
         return true;
+    }
+
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }
