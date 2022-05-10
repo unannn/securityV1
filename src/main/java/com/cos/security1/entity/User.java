@@ -1,6 +1,9 @@
 package com.cos.security1.entity;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User {
     @Id
@@ -25,4 +29,13 @@ public class User {
     @CreationTimestamp
     private Timestamp createDate;
 
+    @Builder
+    public User(String username, String password, String email, String role, String provider, String providerId) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+    }
 }
